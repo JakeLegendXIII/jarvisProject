@@ -78,7 +78,7 @@ def speak(content):
     play(clip)
 
 if __name__ == '__main__':
-    # speak(query_ai('How long would it take to get to Mars?'))
-    while True:
-        listen_for_wake_word()
+    speak(query_ai('How big is the moon?'))
+    #while True:
+    #    listen_for_wake_word()
     print('It Works!')
