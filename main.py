@@ -29,6 +29,17 @@ def query_ai(prompt):
     print('Message: ', message)
     return message
 
+def query_ai_chat(prompt):
+    print('Prompt:', prompt)
+    completions = ai.ChatCompletion.create(
+        model="gpt-3.5-turbo",
+        messages=[
+            {"role": "user", "content": prompt}
+        ]
+    )
+    message = completions.choices[0].message.content
+    print('Message: ', message)
+    return message
 
 def listen_for_wake_word():
     r = sr.Recognizer()
@@ -44,7 +55,7 @@ def listen_for_wake_word():
                 audio_cmd = r.listen(source, 5, 15)
                 cmd = r.recognize_google(audio_cmd)
                 print('Command:', cmd)
-                response = query_ai(cmd)
+                response = query_ai_chat(cmd)
                 speak(response)
             else:
                 print('wake word not detected')
@@ -78,6 +89,7 @@ def speak(content):
     play(clip)
 
 if __name__ == '__main__':
+    #query_ai_chat('How big is the moon?')
     #speak(query_ai('How big is the moon?'))
     while True:
         listen_for_wake_word()
